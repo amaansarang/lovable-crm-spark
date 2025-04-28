@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,7 +62,47 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				// CRM specific colors
+				"crm-blue": {
+					50: "#f0f4fa",
+					100: "#dce7f3",
+					200: "#c1d5ec",
+					300: "#95b8de",
+					400: "#6494cb",
+					500: "#4077b5",
+					600: "#2c5e99",
+					700: "#254b7c",
+					800: "#234067",
+					900: "#213757",
+					950: "#152238"
+				},
+				"crm-teal": {
+					50: "#effef8",
+					100: "#d7fcee",
+					200: "#b2f6dd",
+					300: "#77ebc5",
+					400: "#34d6a8",
+					500: "#13bd90",
+					600: "#079b78",
+					700: "#077c62",
+					800: "#086152",
+					900: "#095045",
+					950: "#032d27"
+				},
+				"crm-amber": {
+					50: "#fffbea",
+					100: "#fff3c7",
+					200: "#ffe78a",
+					300: "#ffd54a",
+					400: "#ffbd20",
+					500: "#f99b07",
+					600: "#dd7202",
+					700: "#b74d06",
+					800: "#953d0c",
+					900: "#7a330e",
+					950: "#461802"
+				},
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -84,11 +125,22 @@ export default {
 					to: {
 						height: '0'
 					}
-				}
+				},
+				'fade-in': {
+					'0%': {
+						opacity: '0',
+						transform: 'translateY(10px)'
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'translateY(0)'
+					}
+				},
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'fade-in': 'fade-in 0.3s ease-out',
 			}
 		}
 	},

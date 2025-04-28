@@ -1,13 +1,41 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import AppLayout from "@/layouts/AppLayout";
+import Dashboard from "@/components/Dashboard";
+import ContactsList from "@/components/ContactsList";
+import DealsPipeline from "@/components/DealsPipeline";
+import TaskManager from "@/components/TaskManager";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
-      </div>
-    </div>
+    <AppLayout>
+      <Tabs defaultValue="dashboard" className="space-y-6">
+        <div className="border-b">
+          <TabsList className="bg-transparent">
+            <TabsTrigger value="dashboard" className="text-lg">Dashboard</TabsTrigger>
+            <TabsTrigger value="contacts" className="text-lg">Contacts</TabsTrigger>
+            <TabsTrigger value="deals" className="text-lg">Deals</TabsTrigger>
+            <TabsTrigger value="tasks" className="text-lg">Tasks</TabsTrigger>
+          </TabsList>
+        </div>
+        
+        <TabsContent value="dashboard" className="space-y-6 animate-fade-in">
+          <Dashboard />
+        </TabsContent>
+        
+        <TabsContent value="contacts" className="space-y-6 animate-fade-in">
+          <ContactsList />
+        </TabsContent>
+        
+        <TabsContent value="deals" className="space-y-6 animate-fade-in">
+          <DealsPipeline />
+        </TabsContent>
+        
+        <TabsContent value="tasks" className="space-y-6 animate-fade-in">
+          <TaskManager />
+        </TabsContent>
+      </Tabs>
+    </AppLayout>
   );
 };
 
