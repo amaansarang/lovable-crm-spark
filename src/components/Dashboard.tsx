@@ -2,6 +2,7 @@
 import React from "react";
 import { AreaChart, BarChart3, Calendar, CheckSquare, DollarSign, Users } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import {
   AreaChart as AreaChartComponent,
   Area,
@@ -17,6 +18,7 @@ import {
 import StatCard from "./StatCard";
 import { dashboardStats, activities } from "@/data/mockData";
 import { formatDistanceToNow } from "date-fns";
+import DashboardChart from "./DashboardChart";
 
 // Sales data for charts
 const salesData = [
@@ -120,31 +122,7 @@ const Dashboard = () => {
         </Card>
         
         {/* Lead Sources Chart */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Lead Sources</CardTitle>
-            <CardDescription>Distribution of leads by source</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="h-[300px]">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={leadSourceData}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
-                  <XAxis dataKey="source" stroke="hsl(var(--muted-foreground))" />
-                  <YAxis stroke="hsl(var(--muted-foreground))" />
-                  <Tooltip
-                    contentStyle={{
-                      backgroundColor: 'hsl(var(--card))',
-                      borderColor: 'hsl(var(--border))'
-                    }}
-                  />
-                  <Legend />
-                  <Bar dataKey="leads" name="Leads" fill="hsl(var(--primary))" barSize={30} radius={[4, 4, 0, 0]} />
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
-          </CardContent>
-        </Card>
+        <DashboardChart data={salesData} title="Sales Performance" />
       </div>
       
       <div className="grid gap-6 md:grid-cols-2">
