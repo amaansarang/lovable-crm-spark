@@ -18,7 +18,7 @@ import { formatDistanceToNow } from "date-fns";
 import DashboardChart from "./DashboardChart";
 
 // Add missing imports
-import { Phone, Mail, FileText, CheckCircle } from "lucide-react";
+import { Phone, Mail, FileText, CheckCircle, Calendar } from "lucide-react";
 
 // Product purchase data for charts
 const purchaseData = [
@@ -46,9 +46,6 @@ const activityIcons: Record<string, React.ReactNode> = {
   note: <FileText className="h-4 w-4 text-amber-500" />,
   task: <CheckCircle className="h-4 w-4 text-green-500" />,
 };
-
-// Add missing Calendar import
-import { Calendar } from "lucide-react";
 
 const Dashboard = () => {
   return (
@@ -124,7 +121,8 @@ const Dashboard = () => {
         {/* Category Spend Chart */}
         <DashboardChart 
           data={purchaseData} 
-          title="Purchase Performance" 
+          title="Purchase Performance"
+          dataKeys={["orders", "spend"]}
         />
       </div>
       

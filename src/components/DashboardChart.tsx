@@ -15,18 +15,22 @@ import {
 interface DashboardChartProps {
   data: Array<{
     name: string;
-    deals: number;
-    revenue: number;
+    [key: string]: string | number;
   }>;
   title: string;
+  dataKeys?: string[];
 }
 
-const DashboardChart: React.FC<DashboardChartProps> = ({ data, title }) => {
+const DashboardChart: React.FC<DashboardChartProps> = ({ 
+  data, 
+  title, 
+  dataKeys = ["deals", "revenue"] 
+}) => {
   return (
     <Card>
       <CardHeader>
         <CardTitle>{title}</CardTitle>
-        <CardDescription>Monthly sales performance metrics</CardDescription>
+        <CardDescription>Monthly performance metrics</CardDescription>
       </CardHeader>
       <CardContent>
         <div className="h-[300px]">
@@ -50,8 +54,16 @@ const DashboardChart: React.FC<DashboardChartProps> = ({ data, title }) => {
                 }}
               />
               <Legend />
-              <Bar dataKey="deals" name="Deals" fill="#8884d8" barSize={30} radius={[4, 4, 0, 0]} />
-              <Bar dataKey="revenue" name="Revenue" fill="#82ca9d" barSize={30} radius={[4, 4, 0, 0]} />
+              {dataKeys.map((key, index) => (
+                <Bar 
+                  key={key}
+                  dataKey={key} 
+                  name={key.charAt(0).toUpperCase() + key.slice(1)} 
+                  fill={index === 0 ? "#8884d8" : "#82ca9d"} 
+                  barSize={30} 
+                  radius={[4, 4, 0, 0]} 
+                />
+              ))}
             </BarChart>
           </ResponsiveContainer>
         </div>

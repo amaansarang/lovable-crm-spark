@@ -4,6 +4,7 @@ import Dashboard from "@/components/Dashboard";
 import ContactsList from "@/components/ContactsList";
 import DealsPipeline from "@/components/DealsPipeline";
 import TaskManager from "@/components/TaskManager";
+import ProductsManagement from "@/components/ProductsManagement";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -48,13 +49,7 @@ const Index = () => {
         </TabsContent>
         
         <TabsContent value="products" className="space-y-6 animate-fade-in">
-          <div className="text-center p-10">
-            <h2 className="text-2xl font-bold mb-4">Products Management</h2>
-            <p className="text-muted-foreground">
-              This section will allow you to manage your product catalog, 
-              track inventory levels, and monitor product performance.
-            </p>
-          </div>
+          <ProductsManagement />
         </TabsContent>
         
         <TabsContent value="purchases" className="space-y-6 animate-fade-in">
