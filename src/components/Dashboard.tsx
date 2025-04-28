@@ -11,9 +11,6 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
-  BarChart,
-  Bar,
-  Legend,
 } from "recharts";
 import StatCard from "./StatCard";
 import { dashboardStats, activities } from "@/data/mockData";
@@ -92,7 +89,7 @@ const Dashboard = () => {
           <CardContent>
             <div className="h-[300px]">
               <ResponsiveContainer width="100%" height="100%">
-                <AreaChart data={salesData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+                <AreaChartComponent data={salesData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                   <defs>
                     <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
                       <stop offset="5%" stopColor="hsl(var(--primary))" stopOpacity={0.8} />
@@ -115,16 +112,17 @@ const Dashboard = () => {
                     fillOpacity={1}
                     fill="url(#colorRevenue)"
                   />
-                </AreaChart>
+                </AreaChartComponent>
               </ResponsiveContainer>
             </div>
           </CardContent>
         </Card>
         
-        {/* Lead Sources Chart */}
+        {/* Sales Performance Chart */}
         <DashboardChart data={salesData} title="Sales Performance" />
       </div>
       
+      {/* Tasks and Recent Activity */}
       <div className="grid gap-6 md:grid-cols-2">
         {/* Tasks */}
         <Card>
