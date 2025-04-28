@@ -18,10 +18,15 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           
+          {/* Procurement routes */}
+          <Route path="/products" element={<Index />} />
+          <Route path="/purchases" element={<Index />} />
+          <Route path="/vendors" element={<Index />} />
+          <Route path="/tasks" element={<Index />} />
+          
           {/* Navigation routes from Sidebar */}
           <Route path="/contacts" element={<Index />} />
           <Route path="/deals" element={<Index />} />
-          <Route path="/tasks" element={<Index />} />
           <Route path="/calendar" element={<Index />} />
           <Route path="/email" element={<Index />} />
           <Route path="/chat" element={<Index />} />

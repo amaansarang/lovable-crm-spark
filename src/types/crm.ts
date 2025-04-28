@@ -66,3 +66,60 @@ export interface ActivityItem {
   userId?: string;
   userName?: string;
 }
+
+export type ProductCategory = 'hardware' | 'software' | 'services' | 'office' | 'other';
+export type ProductStatus = 'active' | 'discontinued' | 'pending';
+
+export interface Product {
+  id: string;
+  name: string;
+  sku: string;
+  description?: string;
+  category: ProductCategory;
+  status: ProductStatus;
+  price: number;
+  vendorId: string;
+  vendorName: string;
+  stockQuantity?: number;
+  minStockLevel?: number;
+  lastPurchaseDate?: string;
+  createdAt: string;
+}
+
+export interface Purchase {
+  id: string;
+  orderNumber: string;
+  vendorId: string;
+  vendorName: string;
+  status: 'pending' | 'approved' | 'shipped' | 'delivered' | 'cancelled';
+  totalAmount: number;
+  items: PurchaseItem[];
+  orderDate: string;
+  expectedDeliveryDate?: string;
+  deliveryDate?: string;
+  notes?: string;
+  createdAt: string;
+}
+
+export interface PurchaseItem {
+  id: string;
+  productId: string;
+  productName: string;
+  quantity: number;
+  unitPrice: number;
+  totalPrice: number;
+}
+
+export interface Vendor {
+  id: string;
+  name: string;
+  contactPerson: string;
+  email: string;
+  phone: string;
+  address?: string;
+  website?: string;
+  paymentTerms?: string;
+  rating?: number;
+  tags: string[];
+  createdAt: string;
+}

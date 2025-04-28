@@ -1,6 +1,6 @@
 
 import React from "react";
-import { AreaChart, BarChart3, Calendar, CheckSquare, DollarSign, Users } from "lucide-react";
+import { AreaChart, BarChart3, CheckSquare, DollarSign, Users, Package2, Store, ShoppingCart } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
@@ -17,23 +17,26 @@ import { dashboardStats, activities } from "@/data/mockData";
 import { formatDistanceToNow } from "date-fns";
 import DashboardChart from "./DashboardChart";
 
-// Sales data for charts
-const salesData = [
-  { name: "Jan", deals: 4, revenue: 18000 },
-  { name: "Feb", deals: 5, revenue: 22000 },
-  { name: "Mar", deals: 7, revenue: 32000 },
-  { name: "Apr", deals: 5, revenue: 24000 },
-  { name: "May", deals: 8, revenue: 36000 },
-  { name: "Jun", deals: 9, revenue: 42000 },
+// Add missing imports
+import { Phone, Mail, FileText, CheckCircle } from "lucide-react";
+
+// Product purchase data for charts
+const purchaseData = [
+  { name: "Jan", orders: 12, spend: 24000 },
+  { name: "Feb", orders: 15, spend: 28000 },
+  { name: "Mar", orders: 18, spend: 35000 },
+  { name: "Apr", orders: 14, spend: 26000 },
+  { name: "May", orders: 19, spend: 38000 },
+  { name: "Jun", orders: 22, spend: 45000 },
 ];
 
-// Lead source data for charts
-const leadSourceData = [
-  { source: "Website", leads: 45 },
-  { source: "Email", leads: 32 },
-  { source: "Social", leads: 28 },
-  { source: "Referral", leads: 18 },
-  { source: "Other", leads: 12 },
+// Product category data
+const categoryData = [
+  { category: "Hardware", spend: 45000 },
+  { category: "Software", spend: 32000 },
+  { category: "Services", spend: 28000 },
+  { category: "Office", spend: 18000 },
+  { category: "Other", spend: 12000 },
 ];
 
 const activityIcons: Record<string, React.ReactNode> = {
@@ -44,54 +47,54 @@ const activityIcons: Record<string, React.ReactNode> = {
   task: <CheckCircle className="h-4 w-4 text-green-500" />,
 };
 
-// Add missing imports
-import { Phone, Mail, FileText, CheckCircle } from "lucide-react";
+// Add missing Calendar import
+import { Calendar } from "lucide-react";
 
 const Dashboard = () => {
   return (
     <div className="space-y-6">
-      <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
+      <h1 className="text-3xl font-bold tracking-tight">Procurement Dashboard</h1>
       
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
         <StatCard
-          title="New Leads"
-          value={dashboardStats.newLeads}
-          icon={<Users className="h-4 w-4" />}
-          trend={{ direction: "up", value: "+8.2%" }}
+          title="Products"
+          value="345"
+          icon={<Package2 className="h-4 w-4" />}
+          trend={{ direction: "up", value: "+12" }}
         />
         <StatCard
-          title="Active Deals"
-          value={dashboardStats.activeDeals}
-          icon={<BarChart3 className="h-4 w-4" />}
-          trend={{ direction: "up", value: "+3.1%" }}
+          title="Vendors"
+          value="48"
+          icon={<Store className="h-4 w-4" />}
+          trend={{ direction: "up", value: "+3" }}
         />
         <StatCard
-          title="Revenue"
+          title="Purchase Orders"
+          value="127"
+          icon={<ShoppingCart className="h-4 w-4" />}
+          trend={{ direction: "up", value: "+14" }}
+        />
+        <StatCard
+          title="Monthly Spend"
           value={`$${dashboardStats.revenue.toLocaleString()}`}
           icon={<DollarSign className="h-4 w-4" />}
-          trend={{ direction: "up", value: "+14.5%" }}
-        />
-        <StatCard
-          title="Conversion Rate"
-          value={`${dashboardStats.conversionRate}%`}
-          icon={<AreaChart className="h-4 w-4" />}
-          trend={{ direction: "down", value: "-2.3%" }}
+          trend={{ direction: "up", value: "+8.5%" }}
         />
       </div>
       
       <div className="grid gap-6 md:grid-cols-2">
-        {/* Revenue Chart */}
+        {/* Procurement Overview Chart */}
         <Card>
           <CardHeader>
-            <CardTitle>Revenue Overview</CardTitle>
-            <CardDescription>Monthly revenue and deals closed</CardDescription>
+            <CardTitle>Procurement Overview</CardTitle>
+            <CardDescription>Monthly orders and spend</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="h-[300px]">
               <ResponsiveContainer width="100%" height="100%">
-                <AreaChartComponent data={salesData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+                <AreaChartComponent data={purchaseData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                   <defs>
-                    <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
+                    <linearGradient id="colorSpend" x1="0" y1="0" x2="0" y2="1">
                       <stop offset="5%" stopColor="hsl(var(--primary))" stopOpacity={0.8} />
                       <stop offset="95%" stopColor="hsl(var(--primary))" stopOpacity={0.1} />
                     </linearGradient>
@@ -107,10 +110,10 @@ const Dashboard = () => {
                   />
                   <Area
                     type="monotone"
-                    dataKey="revenue"
+                    dataKey="spend"
                     stroke="hsl(var(--primary))"
                     fillOpacity={1}
-                    fill="url(#colorRevenue)"
+                    fill="url(#colorSpend)"
                   />
                 </AreaChartComponent>
               </ResponsiveContainer>
@@ -118,8 +121,11 @@ const Dashboard = () => {
           </CardContent>
         </Card>
         
-        {/* Sales Performance Chart */}
-        <DashboardChart data={salesData} title="Sales Performance" />
+        {/* Category Spend Chart */}
+        <DashboardChart 
+          data={purchaseData} 
+          title="Purchase Performance" 
+        />
       </div>
       
       {/* Tasks and Recent Activity */}
@@ -129,8 +135,8 @@ const Dashboard = () => {
           <CardHeader>
             <div className="flex justify-between items-center">
               <div>
-                <CardTitle>Tasks</CardTitle>
-                <CardDescription>Your upcoming tasks</CardDescription>
+                <CardTitle>Procurement Tasks</CardTitle>
+                <CardDescription>Your upcoming procurement tasks</CardDescription>
               </div>
               <Button variant="outline" size="sm">View All</Button>
             </div>
@@ -141,7 +147,7 @@ const Dashboard = () => {
                 <div className="flex items-center gap-3">
                   <CheckSquare className="h-5 w-5 text-primary" />
                   <div>
-                    <p className="font-medium">Follow up with Jane Smith</p>
+                    <p className="font-medium">Review vendor catalog updates</p>
                     <p className="text-sm text-muted-foreground">Due in 2 days</p>
                   </div>
                 </div>
@@ -152,7 +158,7 @@ const Dashboard = () => {
                 <div className="flex items-center gap-3">
                   <CheckSquare className="h-5 w-5 text-primary" />
                   <div>
-                    <p className="font-medium">Send proposal to Acme Inc</p>
+                    <p className="font-medium">Approve purchase order #1234</p>
                     <p className="text-sm text-muted-foreground">Due tomorrow</p>
                   </div>
                 </div>
@@ -163,7 +169,7 @@ const Dashboard = () => {
                 <div className="flex items-center gap-3">
                   <CheckSquare className="h-5 w-5 text-primary" />
                   <div>
-                    <p className="font-medium">Schedule demo with client</p>
+                    <p className="font-medium">Inventory reconciliation</p>
                     <p className="text-sm text-muted-foreground">Due next week</p>
                   </div>
                 </div>
@@ -179,7 +185,7 @@ const Dashboard = () => {
             <div className="flex justify-between items-center">
               <div>
                 <CardTitle>Recent Activity</CardTitle>
-                <CardDescription>Latest actions across the CRM</CardDescription>
+                <CardDescription>Latest procurement activities</CardDescription>
               </div>
               <Button variant="outline" size="sm">View All</Button>
             </div>
